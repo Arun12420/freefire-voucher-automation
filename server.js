@@ -4,6 +4,10 @@ const runBot = require('./bot');
 const app = express();
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Free Fire Automation Server is Running ✅');
+});
+
 app.post('/submit', async (req, res) => {
   const { playerId, product, voucherCode } = req.body;
 
@@ -11,8 +15,10 @@ app.post('/submit', async (req, res) => {
     await runBot(playerId, product, voucherCode);
     res.json({ status: "SUCCESS" });
   } catch (e) {
-    res.json({ status: "FAILED", error: e.message });
+    res.status(500).json({ status: "FAILED", error: e.message });
   }
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running');
+});
