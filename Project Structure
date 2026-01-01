@@ -1,0 +1,6 @@
+freefire-voucher-automation/
+│
+├── server.js        (API + Trigger)
+├── bot.js           (Playwright Automation)
+├── package.json
+└── README.md
